@@ -136,3 +136,40 @@ Humanoid.prototype.greet = function(){return `${this.name} offers a greeting in 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+
+
+  function Hero(heroic){
+    this.alignment = heroic.alignment;
+    this.holyName = heroic.holyName;
+    GameObject.call(this,heroic);
+    CharacterStats.call(this,heroic);
+    Humanoid.call(this,heroic);
+  };
+  Hero.prototype.HolyBlast = function(evilName) {return `${evilName.name} is hit by Holy Blast, ${evilName.name} has ${evilName.healthPoints -10} HP!`};
+  
+  function Villain(evil){
+    this.alignment = evil.alignment;
+    this.evilName = evil.evilName;
+    GameObject.call(this,evil);
+    CharacterStats.call(this,evil);
+    Humanoid.call(this,evil);
+    
+  }
+  Villain.prototype.Strangle = function(holyName){return `${holyName.name} is being Strangled, ${holyName.name} has ${holyName.healthPoints-10} HP!`};
+  
+  const Knight = new Hero({
+      name: 'Knight',
+      healthPoints: 30,
+      alignment: 'Good',
+
+  });
+
+  const Warlock = new Villain({
+    name: 'Warlock',
+    healthPoints: 20,
+    alignment: 'Evil'
+  })
+
+  console.log(Warlock.Strangle(Knight))
+
+  console.log(Knight.HolyBlast(Warlock))
